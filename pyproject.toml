@@ -1,12 +1,14 @@
 [tool.poetry]
 name = "keys"
 version = "0.1.0"
-description = ""
-authors = ["Your Name <you@example.com>"]
+description = "CLI tool that creates passwords"
+authors = ["John Sattari <you@example.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.11"
+pytest = "^7.2.1"
+pre-commit = "^3.0.2"
 
 
 [build-system]
