@@ -6,7 +6,7 @@ authors = ["John Sattari <you@example.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.11"
+python = "^3.8"
 pytest = "^7.2.1"
 pre-commit = "^3.0.2"
 
