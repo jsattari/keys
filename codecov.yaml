@@ -1,0 +1,6 @@
+profiling:
+  critical_files_paths:
+    - keys/cli.py
+
+comment:
+  show_critical_paths: true
