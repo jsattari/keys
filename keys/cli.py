@@ -36,7 +36,7 @@ def main(length: int, remove: str) -> None:
         for char in remove:
             values.replace(char, "")
 
-    print("".join(random.sample(list(values), length)))
+    click.echo("".join(random.sample(list(values), length)))
 
 
 if __name__ == "__main__":
