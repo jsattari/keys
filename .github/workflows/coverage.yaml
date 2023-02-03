@@ -22,7 +22,7 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
 
-      - name: Install poetry
+      - name: Run image
         uses: abatilo/actions-poetry@v2
         with:
           poetry-version: ${{ matrix.poetry-version }}
@@ -31,7 +31,10 @@ jobs:
         run: poetry install
 
       - name: Run tests and collect coverage stats
-        run: poetry run pytest --cov
+        run: poetry run pytest --cov tests
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          fail_ci_if_error: true
