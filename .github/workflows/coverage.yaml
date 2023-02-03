@@ -31,10 +31,12 @@ jobs:
         run: poetry install
 
       - name: Run tests and collect coverage stats
-        run: poetry run pytest --cov=keys
+        run: |
+          poetry run pytest --cov=./ --cov-report=xml
+          bash <(curl https://codecov.io/bash)
 
       - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v1
+        uses: codecov/codecov-action@v3
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           fail_ci_if_error: true
