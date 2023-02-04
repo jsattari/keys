@@ -3,7 +3,7 @@
 
 import click
 import string
-import random
+import secrets
 from typing import List
 
 
@@ -36,7 +36,7 @@ def main(length: int, remove: str) -> None:
         for char in remove:
             values.replace(char, "")
 
-    click.echo("".join(random.sample(list(values), length)))
+    click.echo("".join(secrets.choice(values) for num in range(length)))
 
 
 if __name__ == "__main__":
