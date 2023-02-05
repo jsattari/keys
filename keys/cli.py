@@ -36,6 +36,18 @@ from typing import List, Set
     help="Ensures there are no duplicate characters",
 )
 def main(length: int, remove: str, no_repeats: str) -> None:
+    """CLI app that creates a password for you!
+
+    This function will create a random password for you. Default
+    password length is 8 but can be changed by implementing the proper
+    option. Refer to the --help option for more guides.
+
+    Arguments:
+        length: Desired length of password. Default is 8 characters.
+        remove: Option that ensures characters are exempt (input as string)
+        no_repeats: Flag that disables repeated characters
+    """
+
     list_of_vals: List[str] = list(
         string.ascii_letters + string.digits + string.punctuation
     )
@@ -53,13 +65,13 @@ def main(length: int, remove: str, no_repeats: str) -> None:
     if no_repeats:
         used_chars: Set[str] = Set()
         while length > 0:
-            letter: str = sec.choice(values)
+            value: str = sec.choice(values)
             if char not in used_chars:
-                random_str += letter
+                random_str += value
                 used_chars.add(char)
                 length -= 1
             else:
-                values.replace(letter, "")
+                values.replace(value, "")
                 new_char: str = sec.choice(values)
                 random_str += new_char
                 used_chars.add(new_char)
