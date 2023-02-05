@@ -63,12 +63,12 @@ def main(length: int, remove: str, no_repeats: str) -> None:
     # if no_repeats flag is used, loop through
     # values and add dupes to set
     if no_repeats:
-        used_chars: Set[str] = Set()
+        used_chars: Set[str] = set()
         while length > 0:
             value: str = sec.choice(values)
-            if char not in used_chars:
+            if value not in used_chars:
                 random_str += value
-                used_chars.add(char)
+                used_chars.add(value)
                 length -= 1
             else:
                 values.replace(value, "")
