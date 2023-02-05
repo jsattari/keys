@@ -29,7 +29,7 @@ def test_main_lengths(cmd, solution) -> None:
 )
 def test_remove_characters(cmd, solution) -> None:
     result = runner.invoke(main, cmd)
-    chars = cmd.split(" ")[1]
+    chars = cmd.split(" ")[1].replace("'", "")
     assert result.exit_code == 0
     assert all([x not in result.output[:-1] for x in chars]) == solution
 
