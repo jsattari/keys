@@ -48,6 +48,7 @@ def main(length: int, remove: str, no_repeats: str) -> None:
         no_repeats: Flag that disables repeated characters
     """
 
+    # list of all ascii characters
     list_of_vals: List[str] = list(
         string.ascii_letters + string.digits + string.punctuation
     )
