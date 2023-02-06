@@ -3,8 +3,7 @@
 
 import click
 import string
-import secrets as sec
-from typing import List, Set
+from keys.app import CmdLine
 
 
 @click.command()
@@ -49,38 +48,19 @@ def main(length: int, remove: str, no_repeats: str) -> None:
     """
 
     # list of all ascii characters
-    list_of_vals: List[str] = list(
-        string.ascii_letters + string.digits + string.punctuation
-    )
-    values: str = "".join(list_of_vals)
+    values: str = string.ascii_letters + string.digits + string.punctuation
 
-    # if remove is present, remove chars from values
+    # instantiate password object
+    pw = CmdLine(list(values), length)
+
+    pw.create_password()
+
     if remove:
-        for char in remove:
-            values = values.replace(char, "")
+        pw.remove_chars(remove)
+    elif no_repeats:
+        pw.remove_repeats()
 
-    random_str: str = ""
-
-    # if no_repeats flag is used, loop through
-    # values and add dupes to set
-    if no_repeats:
-        used_chars: Set[str] = set()
-        while length > 0:
-            value: str = sec.choice(values)
-            if value not in used_chars:
-                random_str += value
-                used_chars.add(value)
-                length -= 1
-            else:
-                values.replace(value, "")
-                new_char: str = sec.choice(values)
-                random_str += new_char
-                used_chars.add(new_char)
-                length -= 1
-    else:
-        random_str += "".join([sec.choice(values) for num in range(length)])
-
-    click.echo(random_str)
+    click.echo(pw.get_password())
 
 
 if __name__ == "__main__":
