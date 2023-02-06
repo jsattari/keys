@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding:utf-8 -*-
 
-from typing import List, Set
+from typing import List, Dict
+from collections import Counter
 import secrets as sec
 
 
@@ -25,19 +26,15 @@ class CmdLine:
                 CmdLine.password = self.password.replace(char, new_char)
 
     def remove_repeats(self) -> None:
-        pw_list: List[str] = list(CmdLine.password)
-        char_set: Set[str] = set()
+        pw_dict: Dict[str, int] = Counter(CmdLine.password)
 
-        for num in range(len(pw_list)):
-            if pw_list[num] in char_set:
-                self.chars.remove(pw_list[num])
-                new_char = sec.choice(self.chars)
-                pw_list[num] = new_char
-                char_set.add(new_char)
-            else:
-                char_set.add(pw_list[num])
+        self.remove_chars("".join(list(pw_dict.keys())))
 
-        CmdLine.password = "".join(pw_list)
+        while len(pw_dict) < self.length:
+            new_char = sec.choice(self.chars)
+            pw_dict[new_char] += 1
+
+        CmdLine.password = "".join(list(pw_dict.keys()))
 
     def get_password(self) -> str:
         return CmdLine.password
