@@ -7,6 +7,25 @@ import secrets as sec
 
 
 class CmdLine:
+    """
+    Class that creates password as an object and can apply various methods
+    for updates and validation
+
+    Attributes:
+        chars: list of characters available for random password creation
+        length: desired length of password
+
+    Methods:
+        create_password: Creates password from input list of chars
+        remove_chars: Input is a string of unwanted characters.
+            Method removes these characters from the password string
+            and replaces them with new characters
+        remove_repeats: Removes duplicate values from
+            password string. Replaces duplicates with
+            new characters from chars list
+
+    """
+
     password = ""
 
     def __init__(self, chars: List[str], length: int) -> None:
