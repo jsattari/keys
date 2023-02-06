@@ -28,7 +28,8 @@ def test_removing_chars(vals, length, removals, solution) -> None:
     cli = CmdLine(list(vals), length)
     cli.create_password()
     cli.remove_chars(removals)
-    assert (len(cli.get_password()) == length) == solution
+    pw = cli.get_password()
+    assert all([True if x not in pw else False for x in removals]) == solution
 
 
 @pytest.mark.parametrize(

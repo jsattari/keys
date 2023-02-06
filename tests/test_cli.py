@@ -30,8 +30,9 @@ def test_main_lengths(cmd, solution) -> None:
 def test_remove_characters(cmd, solution) -> None:
     result = runner.invoke(main, cmd)
     chars = cmd.split(" ")[1].replace("'", "")
+    output = result.output[:-1]
     assert result.exit_code == 0
-    assert all([x not in result.output[:-1] for x in chars]) == solution
+    assert all([True if x not in output else False for x in chars]) == solution
 
 
 @pytest.mark.parametrize("cmd, solution", [("-n", True)])
