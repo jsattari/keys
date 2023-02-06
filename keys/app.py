@@ -9,7 +9,7 @@ class CmdLine:
     password = ""
 
     def __init__(self, chars: List[str], length: int) -> None:
-        self.chars: List[str] = list(chars)
+        self.chars: List[str] = chars
         self.length: int = length
 
     def create_password(self) -> None:
