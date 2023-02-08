@@ -1,6 +1,6 @@
 import pytest
 import string
-from keys.app import CmdLine
+from keys.tools import CmdLine, strength_checker
 
 # initialize variable containing chars
 test_values: str = string.ascii_letters + string.digits + string.punctuation
@@ -41,3 +41,11 @@ def test_remove_repeats(vals, length, solution) -> None:
     cli.create_password()
     cli.remove_repeats()
     assert (len(set(cli.get_password())) == length) == solution
+
+
+@pytest.mark.parametrize(
+    "password, solution", [("AAAAAAA", "\33[30m\33[41mWEAK PASSWORD STRENGTH")]
+)
+def test_strength_checker(password, solution) -> None:
+    result = strength_checker(password)
+    assert result == solution

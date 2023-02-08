@@ -42,3 +42,12 @@ def test_no_repeats(cmd, solution) -> None:
     assert (
         len(set(result.output[:-1])) == len(result.output[:-1])
     ) == solution  # noqa: E501
+
+
+@pytest.mark.parametrize(
+    "cmd, solution", [("-c 'AAAAAAA'", "\33[30m\33[41mWEAK PASSWORD STRENGTH")]
+)
+def test_strength_checker(cmd, solution) -> None:
+    result = runner.invoke(main, cmd)
+    assert result.exit_code == 0
+    assert result.output[:1] == solution
