@@ -55,7 +55,7 @@ def main(length: int, remove: str, no_repeats: str, check: str) -> None:
         no_repeats: Flag that disables repeated characters
     """
 
-    output: str = ""
+    output: str = "a"  # placeholder string
 
     # check password strength
     if check:
