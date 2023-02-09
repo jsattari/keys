@@ -44,7 +44,8 @@ def test_remove_repeats(vals, length, solution) -> None:
 
 
 @pytest.mark.parametrize(
-    "password, solution", [("AAAAAAA", "\33[30m\33[41mWEAK PASSWORD STRENGTH")]
+    "password, solution",
+    [("AAAAAAA", "\33[30m\33[41m\33[1mWEAK PASSWORD STRENGTH\033[0m")],
 )
 def test_strength_checker(password, solution) -> None:
     result = strength_checker(password)
