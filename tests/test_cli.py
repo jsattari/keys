@@ -24,7 +24,7 @@ def test_main_lengths(cmd, solution) -> None:
         ("-r 'xyz'", True),
         ("-r '123'", True),
         ("-r '1A2B3C'", True),
-        ("-r '%@!!'", True),
+        ("-r '%@!-'", True),
     ],
 )
 def test_remove_characters(cmd, solution) -> None:
