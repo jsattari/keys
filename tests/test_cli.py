@@ -45,9 +45,14 @@ def test_no_repeats(cmd, solution) -> None:
 
 
 @pytest.mark.parametrize(
-    "cmd, solution", [("-c 'AAAAAAA'", "\33[30m\33[41mWEAK PASSWORD STRENGTH")]
+    "cmd, solution",
+    [
+        ("-c 'AAAAAAA'", "WEAK PASSWORD STRENGTH"),
+        ("-c 'sa239@#k)-wEEr'", "MEDIUM PASSWORD STRENGTH"),
+        ("-c 'A#n-klEX!'", "STRONG PASSWORD"),
+    ],
 )
 def test_strength_checker(cmd, solution) -> None:
     result = runner.invoke(main, cmd)
     assert result.exit_code == 0
-    assert result.output[:1] == solution
+    assert result.output[:-1] == solution
