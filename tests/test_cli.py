@@ -48,8 +48,8 @@ def test_no_repeats(cmd, solution) -> None:
     "cmd, solution",
     [
         ("-c 'AAAAAAA'", "WEAK PASSWORD STRENGTH"),
-        ("-c 'sa239@#k)-wEEr'", "MEDIUM PASSWORD STRENGTH"),
-        ("-c 'A#n-klEX!'", "STRONG PASSWORD"),
+        ("-c 'sa239@#k)'", "MEDIUM PASSWORD STRENGTH"),
+        ("-c 'A2-xr@9MQ6%w'", "STRONG PASSWORD"),
     ],
 )
 def test_strength_checker(cmd, solution) -> None:
