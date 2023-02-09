@@ -70,25 +70,28 @@ def strength_checker(val: str) -> str:
         string.punctuation,
     ]
 
-    if len(val) >= 16:
-        score += 2
-    elif len(val) >= 8:
-        score += 1
-    else:
-        score -= 1
+    pw_lens: List[int] = [8, 12, 16, 20]
+
+    char_lens: List[int] = [1, 2, 3]
+
+    for ele in pw_lens:
+        if len(val) >= ele:
+            score += 1
 
     for item in str_values:
-        if len(re.findall(f"[{item}]", val)) >= 3:
-            score += 2
+        item_arr: List[str] = re.findall(f"[{item}]", val)
+        for ele in char_lens:
+            if len(item_arr) >= ele:
+                score += 1
 
     if len(set(val)) == len(val):
-        score += 1
+        score += 2
     else:
-        score -= 1
+        score -= 2
 
-    if score >= 7:
-        return "\33[30m\33[42mSTRONG PASSWORD"
-    elif score < 7 and score >= 4:
-        return "\33[30m\33[43mMEDIUM PASSWORD STRENGTH"
+    if score >= 14:
+        return "\33[30m\33[42m\33[1mSTRONG PASSWORD\033[0m"
+    elif score < 14 and score >= 7:
+        return "\33[30m\33[43m\33[1mMEDIUM PASSWORD STRENGTH\033[0m"
     else:
-        return "\33[30m\33[41mWEAK PASSWORD STRENGTH"
+        return "\33[30m\33[41m\33[1mWEAK PASSWORD STRENGTH\033[0m"
