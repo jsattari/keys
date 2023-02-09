@@ -3,7 +3,7 @@
 
 import click
 import string
-from keys.app import CmdLine
+from keys.tools import CmdLine, strength_checker
 
 
 @click.command()
@@ -34,7 +34,15 @@ from keys.app import CmdLine
     default=False,
     help="Ensures there are no duplicate characters",
 )
-def main(length: int, remove: str, no_repeats: str) -> None:
+@click.option(
+    "--check",
+    "-c",
+    "check",
+    required=False,
+    type=str,
+    help="Checks string and returns password strength rating",
+)
+def main(length: int, remove: str, no_repeats: str, check: str) -> None:
     """CLI app that creates a password for you!
 
     This function will create a random password for you. Default
@@ -47,20 +55,28 @@ def main(length: int, remove: str, no_repeats: str) -> None:
         no_repeats: Flag that disables repeated characters
     """
 
-    # list of all ascii characters
-    values: str = string.ascii_letters + string.digits + string.punctuation
+    output: str = ""
 
-    # instantiate password object
-    pw = CmdLine(list(values), length)
+    # check password strength
+    if check:
+        output = strength_checker(check)
+    else:
+        # list of all ascii characters
+        values: str = string.ascii_letters + string.digits + string.punctuation
 
-    pw.create_password()
+        # instantiate password object
+        pw = CmdLine(list(values), length)
 
-    if remove:
-        pw.remove_chars(remove)
-    elif no_repeats:
-        pw.remove_repeats()
+        pw.create_password()
 
-    click.echo(pw.get_password())
+        if remove:
+            pw.remove_chars(remove)
+        elif no_repeats:
+            pw.remove_repeats()
+
+        output = pw.get_password()
+
+    click.echo(output)
 
 
 if __name__ == "__main__":

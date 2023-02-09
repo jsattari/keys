@@ -2,8 +2,10 @@
 # -*- coding:utf-8 -*-
 
 from typing import List, Dict
+import string
 from collections import Counter
 import secrets as sec
+import re
 
 
 class CmdLine:
@@ -57,3 +59,36 @@ class CmdLine:
 
     def get_password(self) -> str:
         return CmdLine.password
+
+
+def strength_checker(val: str) -> str:
+    score: int = 0
+    str_values: List[str] = [
+        string.ascii_lowercase,
+        string.ascii_uppercase,
+        string.digits,
+        string.punctuation,
+    ]
+
+    if len(val) >= 16:
+        score += 2
+    elif len(val) >= 8:
+        score += 1
+    else:
+        score -= 1
+
+    for item in str_values:
+        if len(re.findall(f"[{item}]", val)) >= 3:
+            score += 2
+
+    if len(set(val)) == len(val):
+        score += 1
+    else:
+        score -= 1
+
+    if score >= 7:
+        return "\33[30m\33[42mSTRONG PASSWORD"
+    elif score < 7 and score >= 4:
+        return "\33[30m\33[43mMEDIUM PASSWORD STRENGTH"
+    else:
+        return "\33[30m\33[41mWEAK PASSWORD STRENGTH"
