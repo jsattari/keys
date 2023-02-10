@@ -1,43 +1,41 @@
 import pytest
-import string
+from typing import List
 from keys.tools import CmdLine, strength_checker
-
-# initialize variable containing chars
-test_values: str = string.ascii_letters + string.digits + string.punctuation
 
 
 @pytest.mark.parametrize(
-    "vals, length, solution",
-    [(test_values, 8, True), (test_values, 13, True), (test_values, 35, True)],
+    "length, strong, solution",
+    [(8, False, True), (13, False, True), (35, False, True)],
 )
-def test_create_pw(vals, length, solution) -> None:
-    cli = CmdLine(list(vals), length)
+def test_create_pw(length, strong, solution) -> None:
+    cli = CmdLine(length=length, strong=strong)  # type: ignore[call-arg]
     cli.create_password()
     assert (len(cli.get_password()) == length) == solution
 
 
 @pytest.mark.parametrize(
-    "vals, length, removals, solution",
+    "length, strong, removals, solution",
     [
-        (test_values, 6, "xyz", True),
-        (test_values, 18, "123", True),
-        (test_values, 22, "@#$%", True),
+        (6, False, "xyz", True),
+        (18, False, "123", True),
+        (22, False, "@#$%", True),
     ],
 )
-def test_removing_chars(vals, length, removals, solution) -> None:
-    cli = CmdLine(list(vals), length)
+def test_removing_chars(length, strong, removals, solution) -> None:
+    cli = CmdLine(length=length, strong=strong)  # type: ignore[call-arg]
     cli.create_password()
     cli.remove_chars(removals)
     pw = cli.get_password()
-    assert all([True if x not in pw else False for x in removals]) == solution
+    exempt: List[str] = removals.split()
+    assert all([0 if char in pw else 1 for char in exempt]) == solution
 
 
 @pytest.mark.parametrize(
-    "vals, length, solution",
-    [(test_values, 9, True), (test_values, 12, True), (test_values, 29, True)],
+    "length, strong, solution",
+    [(9, False, True), (12, False, True), (29, False, True)],
 )
-def test_remove_repeats(vals, length, solution) -> None:
-    cli = CmdLine(list(vals), length)
+def test_remove_repeats(length, strong, solution) -> None:
+    cli = CmdLine(length=length, strong=strong)  # type: ignore[call-arg]
     cli.create_password()
     cli.remove_repeats()
     assert (len(set(cli.get_password())) == length) == solution
