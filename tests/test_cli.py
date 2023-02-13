@@ -9,7 +9,13 @@ runner = CliRunner()
 
 # test for lengths
 @pytest.mark.parametrize(
-    "cmd, solution", [("-l 12", 12), ("-l 6", 6), ("-l 22", 22), ("-l 31", 31)]
+    "cmd, solution",
+    [
+        ("-l 12", 12),
+        ("-l 6", 6),
+        ("-l 22", 22),
+        ("-l 31", 31),
+    ],
 )
 def test_main_lengths(cmd, solution) -> None:
     result = runner.invoke(main, cmd)
@@ -31,6 +37,7 @@ def test_remove_characters(cmd, solution) -> None:
     result = runner.invoke(main, cmd)
     chars = cmd.split(" ")[1].replace("'", "")
     output = result.output[:-1]
+    print(chars, output)
     assert result.exit_code == 0
     assert all([True if x not in output else False for x in chars]) == solution
 
