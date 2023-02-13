@@ -3,6 +3,7 @@
 
 from typing import List, Dict
 import string
+from random import shuffle
 from collections import Counter
 import secrets as sec
 import re
@@ -14,8 +15,10 @@ class CmdLine:
     for updates and validation
 
     Attributes:
-        chars: list of characters available for random password creation
-        length: desired length of password
+        length: Desired length of password
+        strength_flag: Flag declaring that the user prefers a strong password.
+            If applied, this will ignore legth input and create a strong
+            password instead
 
     Methods:
         create_password: Creates password from input list of chars
@@ -28,23 +31,48 @@ class CmdLine:
 
     """
 
-    password = ""
+    password: str = ""
+    str_values: str = "".join(
+        [
+            string.ascii_lowercase,
+            string.ascii_uppercase,
+            string.digits,
+            string.punctuation,
+        ]
+    )
 
-    def __init__(self, chars: List[str], length: int) -> None:
-        self.chars: List[str] = chars
-        self.length: int = length
+    def __init__(self, length: int, strong: bool) -> None:
+        self.length = length
+        self.strong = strong
 
     def create_password(self) -> None:
-        CmdLine.password = "".join(
-            [sec.choice(self.chars) for num in range(self.length)]
-        )
+        if self.strong:
+            new_pw: str = sec.choice(CmdLine.str_values)
+
+            counter: int = len(new_pw)
+
+            strong_pw: str = "\33[30m\33[42m\33[1mSTRONG PASSWORD\033[0m"
+
+            while strength_checker(new_pw) != strong_pw:
+                shuffled_str_vals: List[str] = list(CmdLine.str_values)
+                shuffle(shuffled_str_vals)
+                CmdLine.str_values = "".join(shuffled_str_vals)
+                new_char: str = sec.choice(CmdLine.str_values[counter % 4])
+                new_pw += new_char
+                counter += 1
+
+            CmdLine.password = new_pw
+        else:
+            CmdLine.password = "".join(
+                [sec.choice(CmdLine.str_values) for num in range(self.length)]
+            )
 
     def remove_chars(self, removals: str) -> None:
         for char in removals:
             if char in CmdLine.password:
-                self.chars.remove(char)
-                new_char = sec.choice(self.chars)
-                CmdLine.password = self.password.replace(char, new_char)
+                CmdLine.str_values = CmdLine.str_values.replace(char, "")
+                new_char = sec.choice(CmdLine.str_values)
+                CmdLine.password = CmdLine.password.replace(char, new_char)
 
     def remove_repeats(self) -> None:
         pw_dict: Dict[str, int] = Counter(CmdLine.password)
@@ -52,7 +80,7 @@ class CmdLine:
         self.remove_chars("".join(list(pw_dict.keys())))
 
         while len(pw_dict) < self.length:
-            new_char = sec.choice(self.chars)
+            new_char = sec.choice(CmdLine.str_values)
             pw_dict[new_char] += 1
 
         CmdLine.password = "".join(list(pw_dict.keys()))
