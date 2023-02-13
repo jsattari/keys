@@ -2,7 +2,6 @@
 # -*- coding:utf-8 -*-
 
 import click
-import string
 from keys.tools import CmdLine, strength_checker
 
 
@@ -42,7 +41,17 @@ from keys.tools import CmdLine, strength_checker
     type=str,
     help="Checks string and returns password strength rating",
 )
-def main(length: int, remove: str, no_repeats: str, check: str) -> None:
+@click.option(
+    "--strong",
+    "-s",
+    "strong",
+    required=False,
+    is_flag=True,
+    help="Ignores length input and instead returns a strong password",
+)
+def main(
+    length: int, remove: str, no_repeats: str, check: str, strong: bool
+) -> None:  # main function
     """CLI app that creates a password for you!
 
     This function will create a random password for you. Default
@@ -53,19 +62,21 @@ def main(length: int, remove: str, no_repeats: str, check: str) -> None:
         length: Desired length of password. Default is 8 characters.
         remove: Option that ensures characters are exempt (input as string)
         no_repeats: Flag that disables repeated characters
+        check:  Reviews password input and provides a strength rating
     """
-
-    output: str = "a"  # placeholder string
 
     # check password strength
     if check:
-        output = strength_checker(check)
-    else:
-        # list of all ascii characters
-        values: str = string.ascii_letters + string.digits + string.punctuation
+        click.echo(strength_checker(check))
+    elif strong:
+        pw = CmdLine(length=length, strong=strong)
 
+        pw.create_password()
+
+        click.echo(pw.get_password())
+    else:
         # instantiate password object
-        pw = CmdLine(list(values), length)
+        pw = CmdLine(length=length, strong=strong)
 
         pw.create_password()
 
@@ -74,9 +85,7 @@ def main(length: int, remove: str, no_repeats: str, check: str) -> None:
         elif no_repeats:
             pw.remove_repeats()
 
-        output = pw.get_password()
-
-    click.echo(output)
+        click.echo(pw.get_password())
 
 
 if __name__ == "__main__":
