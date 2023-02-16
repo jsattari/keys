@@ -1,6 +1,9 @@
-name: Running Code Coverage
+name: Testing
 
-on: [pull_request]
+on:
+  push:
+    paths:
+      - "keys/*"
 
 jobs:
   build:
@@ -30,13 +33,5 @@ jobs:
       - name: Install dependencies
         run: poetry install
 
-      - name: Run tests and collect coverage stats
-        run: |
-          poetry run pytest --cov=./ --cov-report=xml
-          bash <(curl https://codecov.io/bash)
-
-      - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v3
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-          fail_ci_if_error: true
+      - name: Run tests
+        run: poetry run pytest -v

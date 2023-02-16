@@ -1,5 +1,6 @@
 [![codecov](https://codecov.io/gh/jsattari/keys/branch/master/graph/badge.svg?token=8XQ4MXVR3M)](https://codecov.io/gh/jsattari/keys)
+![python](https://img.shields.io/badge/Python-3.8%2C%203.9%2C%203.10%2C%203.11-blue)
+![pip install](https://img.shields.io/badge/pip%20install-click-blue)
+[![Testing](https://github.com/jsattari/keys/actions/workflows/tests.yaml/badge.svg)](https://github.com/jsattari/keys/actions/workflows/tests.yaml)
 
-[![python](./src/python.svg)](https://badges.aleen42.com/src/python.svg)
-
-[![cli](./src/cli.svg)](https://badges.aleen42.com/src/cli.svg)
+# Keys (Password Generator)
