@@ -2,7 +2,7 @@
 name = "keys"
 version = "0.1.0"
 description = "CLI tool that creates passwords"
-authors = ["John Sattari <you@example.com>"]
+authors = ["John Sattari <jsattari3@gmail.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
