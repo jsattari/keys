@@ -1,5 +1,5 @@
 import pytest
-from src.cli import main
+from keyspwgenerator.cli import main
 from click.testing import CliRunner
 
 

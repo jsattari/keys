@@ -3,7 +3,7 @@ name: Testing
 on:
   push:
     paths:
-      - "src/*"
+      - "keyspwgenerator/*"
 
 jobs:
   build:

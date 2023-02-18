@@ -2,7 +2,7 @@
 # -*- coding:utf-8 -*-
 
 import click
-from src.tools import CmdLine, strength_checker
+from keyspwgenerator.tools import CmdLine, strength_checker
 
 
 @click.command()
