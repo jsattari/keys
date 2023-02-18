@@ -1,6 +1,6 @@
 import pytest
 from typing import List
-from keys.tools import CmdLine, strength_checker
+from src.tools import CmdLine, strength_checker
 
 
 @pytest.mark.parametrize(

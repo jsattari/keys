@@ -1,5 +1,5 @@
 import pytest
-from keys.cli import main
+from src.cli import main
 from click.testing import CliRunner
 
 
