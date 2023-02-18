@@ -14,7 +14,7 @@ Keys is a password generator that creates new passwords from uppercase letters, 
 
 ## Installation
 
-    pip3 install keys
+    pip3 install keyspwgenerator --user
 
 ## Usage
 
