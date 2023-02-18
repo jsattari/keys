@@ -3,7 +3,7 @@ name: Testing
 on:
   push:
     paths:
-      - "keys/*"
+      - "keys-pw-generator/*"
 
 jobs:
   build:
