@@ -5,6 +5,8 @@ description = "CLI tool that creates passwords"
 authors = ["John Sattari <jsattari3@gmail.com>"]
 readme = "README.md"
 license = "MIT"
+homepage = "https://github.com/jsattari/keys"
+repository = "https://github.com/jsattari/keys"
 keywords = ["keys", "password", "generator"]
 
 [tool.poetry.dependencies]
