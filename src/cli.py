@@ -2,7 +2,7 @@
 # -*- coding:utf-8 -*-
 
 import click
-from keys.tools import CmdLine, strength_checker
+from src.tools import CmdLine, strength_checker
 
 
 @click.command()
