@@ -2,6 +2,7 @@
 
 ![python](https://img.shields.io/badge/Python-3.8%2C%203.9%2C%203.10%2C%203.11-blue)
 [![pip install](https://img.shields.io/badge/pip%20install-click-blue)](https://palletsprojects.com/p/click/)
+[![pypi](https://img.shields.io/badge/pypi-v0.1.0-orange)](https://pypi.org/project/keyspwgenerator/)
 [![license](https://img.shields.io/badge/License-MIT-blue)](https://opensource.org/license/mit/)
 [![Testing](https://github.com/jsattari/keys/actions/workflows/tests.yaml/badge.svg)](https://github.com/jsattari/keys/actions/workflows/tests.yaml)
 [![codecov](https://codecov.io/gh/jsattari/keys/branch/master/graph/badge.svg?token=8XQ4MXVR3M)](https://codecov.io/gh/jsattari/keys)

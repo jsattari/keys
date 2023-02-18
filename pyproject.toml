@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "keyspwgenerator"
-version = "0.1.0"
+version = "0.1.1"
 description = "CLI tool that creates passwords"
 authors = ["John Sattari <jsattari3@gmail.com>"]
 readme = "README.md"
